@@ -47,6 +47,16 @@ After the Docker container starts, a URL for the Jupyter Notebook editor will ap
    mkdir -p data/imdb
    ```
 3. Execute cell in the ```dataset_loader.ipynb``` file to load the dataset.
+### 5. Install project's dependecies
+1. Create and acrivate virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate
+   ```
+2. Install the ```requirements.txt``` file:
+   ```bash
+   pip install -r requirements.txt
+   ```
 ## Project Structure
 
 - `schemas.py`: Contains schema definitions for all IMDB datasets and creates PySpark DataFrames
