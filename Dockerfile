@@ -1,20 +1,15 @@
-# Use the official Jupyter PySpark notebook image as the base
-FROM jupyter/pyspark-notebook:latest
+ARG IMAGE_VARIANT=slim-buster
+ARG OPENJDK_VERSION=8
+ARG PYTHON_VERSION=3.9.8
 
-# Set the working directory inside the container
-WORKDIR /home/jovyan/work
+FROM python:${PYTHON_VERSION}-${IMAGE_VARIANT} AS py3
+FROM openjdk:${OPENJDK_VERSION}-${IMAGE_VARIANT}
 
-# Copy the local 'notebooks' and 'data' directories into the container
-COPY notebooks /home/jovyan/work/notebooks
-COPY data /home/jovyan/work/data
+COPY --from=py3 / /
 
-# Set environment variables to configure Jupyter Notebook
-ENV JUPYTER_ENABLE_LAB="no"
-ENV NOTEBOOK_DIR="/home/jovyan/work/notebooks"
+ARG PYSPARK_VERSION=3.2.0
+RUN pip --no-cache-dir install pyspark==${PYSPARK_VERSION}
 
-# Expose the port that Jupyter Notebook will run on
-EXPOSE 8888
+COPY . .
 
-#! commands
-# docker build -t imdb_spark_project .
-# docker run -it --rm -p 8888:8888 imdb_spark_project
+CMD python main.py
