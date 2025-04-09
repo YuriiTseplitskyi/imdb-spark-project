@@ -1,12 +1,19 @@
-# IMDB Spark Project
+# 🎬 IMDB Spark Project
 
-A data analysis project using Apache Spark to process and analyze IMDB data.
+A data analysis project using **Apache Spark** and **PySpark** to process and analyze data from the IMDB dataset.
 
-## Project Overview
+## 📌 Overview
 
-This project provides analysis of IMDB data using PySpark. It includes predefined schemas for all IMDB datasets and utility functions for data exploration and analysis.
+This project provides tools to explore and analyze the IMDB dataset using **PySpark**, with schemas and utilities for data transformation, querying, and visualization.
 
-## Getting Started
+Features:
+- Predefined schemas for all IMDB datasets
+- Utility functions for efficient analysis
+- Interactive exploration with Jupyter Notebooks
+- Dockerized environment for easy setup and reproducibility
+
+
+## 🚀 Getting Started
 
 ### 1. Clone the repository
 
@@ -15,59 +22,41 @@ git clone <repository-url>
 cd imdb_spark_project
 ```
 
-### 2. Download IMDB datasets
+### 2. Run with Docker
 
-Create the data directory structure:
-
-```bash
-mkdir -p data/imdb
-```
-
-#### For Windows PowerShell:
-
-```powershell
-Invoke-WebRequest -Uri "https://datasets.imdbws.com/title.basics.tsv.gz" -OutFile "$HOME/imdb_spark_project/data/imdb/title.basics.tsv.gz"
-Invoke-WebRequest -Uri "https://datasets.imdbws.com/title.ratings.tsv.gz" -OutFile "$HOME/imdb_spark_project/data/imdb/title.ratings.tsv.gz"
-Invoke-WebRequest -Uri "https://datasets.imdbws.com/title.crew.tsv.gz" -OutFile "$HOME/imdb_spark_project/data/imdb/title.crew.tsv.gz"
-Invoke-WebRequest -Uri "https://datasets.imdbws.com/title.akas.tsv.gz" -OutFile "$HOME/imdb_spark_project/data/imdb/title.akas.tsv.gz"
-Invoke-WebRequest -Uri "https://datasets.imdbws.com/title.episode.tsv.gz" -OutFile "$HOME/imdb_spark_project/data/imdb/title.episode.tsv.gz"
-Invoke-WebRequest -Uri "https://datasets.imdbws.com/title.principals.tsv.gz" -OutFile "$HOME/imdb_spark_project/data/imdb/title.principals.tsv.gz"
-Invoke-WebRequest -Uri "https://datasets.imdbws.com/name.basics.tsv.gz" -OutFile "$HOME/imdb_spark_project/data/imdb/name.basics.tsv.gz"
-```
-
-#### For Linux/macOS:
-
-```bash
-wget -P $HOME/imdb_spark_project/data/imdb https://datasets.imdbws.com/title.basics.tsv.gz
-wget -P $HOME/imdb_spark_project/data/imdb https://datasets.imdbws.com/title.ratings.tsv.gz
-wget -P $HOME/imdb_spark_project/data/imdb https://datasets.imdbws.com/title.crew.tsv.gz
-wget -P $HOME/imdb_spark_project/data/imdb https://datasets.imdbws.com/title.akas.tsv.gz
-wget -P $HOME/imdb_spark_project/data/imdb https://datasets.imdbws.com/title.episode.tsv.gz
-wget -P $HOME/imdb_spark_project/data/imdb https://datasets.imdbws.com/title.principals.tsv.gz
-wget -P $HOME/imdb_spark_project/data/imdb https://datasets.imdbws.com/name.basics.tsv.gz
-```
-
-### 3. Run with Docker
-
-You can also run the project using Docker:
-
-1. Switch to Linux containers:
-    ```bash
-    docker switch linux
-    ```
-
-1. Build the Docker image:
+To build and run the Docker container:
    ```bash
-   docker build -t imdb_spark_project .
+   docker compose up --build
    ```
 
-2. Run the container:
+For subsequent runs:
    ```bash
-   docker run -it --rm -p 8888:8888 imdb_spark_project
+   docker compose up
    ```
-
-3. Open the Jupyter Notebook URL provided in the console.
-
+### 3. Open Jupiter Notebook editor locally
+After the Docker container starts, a URL for the Jupyter Notebook editor will appear in your terminal. The link will begin with ```http://localhost:8888/lab?token=``` followed by a unique authentication token. To access the editor, either:
+- Hold CTRL and click the URL (or CMD+click on Mac), or
+- Copy the entire URL (including the token) and paste it into your web browser
+### 4. Create directory for IMDB datasets
+1. After Jupiter Notebook editor is opened, you need to open a terminal there and enter ```code``` directory:
+   ```bash
+   cd code
+   ```
+2. Create the data directory structure:
+   ```bash
+   mkdir -p data/imdb
+   ```
+3. Execute cell in the ```dataset_loader.ipynb``` file to load the dataset.
+### 5. Install project's dependecies
+1. Create and acrivate virtual environment:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate
+   ```
+2. Install the ```requirements.txt``` file:
+   ```bash
+   pip install -r requirements.txt
+   ```
 ## Project Structure
 
 - `schemas.py`: Contains schema definitions for all IMDB datasets and creates PySpark DataFrames
